@@ -6,6 +6,12 @@ import { redirect } from 'next/navigation';
 
 const prisma = new PrismaClient();
 
+export const fetchBlogs = async () => {
+  const blogs = await prisma.blog.findMany({});
+
+  return blogs;
+};
+
 export const addBlog = async formData => {
   //collect info from form using formData
   const title = formData.get('title');

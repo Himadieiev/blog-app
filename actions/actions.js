@@ -12,6 +12,16 @@ export const fetchBlogs = async () => {
   return blogs;
 };
 
+export const fetchSingleBlog = async id => {
+  const blog = await prisma.blog.findFirst({
+    where: {
+      id: id,
+    },
+  });
+
+  return blog;
+};
+
 export const addBlog = async formData => {
   //collect info from form using formData
   const title = formData.get('title');
@@ -29,6 +39,6 @@ export const addBlog = async formData => {
     },
   });
 
-  //   revalidatePath('/blogs/add-blog');
+  revalidatePath('/blogs/add-blog');
   redirect('/blogs');
 };

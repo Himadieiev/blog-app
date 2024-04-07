@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { fetchSingleBlog } from '../../../actions/actions';
 
 const BlogDetail = async ({ params }) => {
@@ -31,6 +32,13 @@ const BlogDetail = async ({ params }) => {
         </h3>
 
         <p className="text-center text-gray-300 my-2 mx-2 px-2 py-2">{blog?.description}</p>
+
+        <Link
+          className="text-gray-700 bg-gray-200 my-2 border-2 py-2 rounded-lg border-gray-400 shadow-sm mx-2 px-2"
+          href={`/blogs/update-blog/${blog?.id}`}
+        >
+          Update Blog
+        </Link>
       </div>
     </div>
   );

@@ -1,11 +1,25 @@
-import { fetchBlogs } from '../../actions/actions';
-import BlogItem from '../components/BlogItem';
+import { PrismaClient } from '@prisma/client';
 
-const Blogs = async () => {
-  const blogs = await fetchBlogs();
+import BlogItem from '../components/BlogItem';
+import Search from '../components/Search';
+
+const prisma = new PrismaClient();
+
+const Blogs = async ({ searchParams }) => {
+  const query = searchParams?.query;
+
+  // home blogs listing page
+  const blogs = await prisma.blog.findMany({
+    where: query
+      ? {
+          OR: [{ title: { contains: query } }, { category: { contains: query } }],
+        }
+      : {}, // fetch all the data blogs
+  });
 
   return (
     <div>
+      <Search />
       <h2 className="text-center text-2xl mt-4 px-2 py-2 font-bold">All Blogs</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5 mb-5 px-4 py-5">

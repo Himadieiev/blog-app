@@ -72,7 +72,21 @@ export const updateBlog = async (id, formData) => {
 
   revalidatePath(`/blogs/update-blog/${id}`);
   redirect('/blogs');
-  // } else {
-  //   console.log('Not Possible!');
-  // }
+};
+
+// add comment to a blog
+export const addCommentToBlog = async (blogId, formData) => {
+  // collect info from form using formData
+  const text = formData.get('text');
+
+  // push the data into the DB
+  const added_comment = await prisma.comment.create({
+    data: {
+      blogId,
+      text,
+    },
+  });
+
+  revalidatePath(`/blogs/${blogId}`);
+  redirect(`/blogs/${blogId}`);
 };

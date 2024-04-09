@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { fetchSingleBlog } from '../../../actions/actions';
+import CommentAddForm from '@/app/components/forms/CommentAddForm';
 
 const BlogDetail = async ({ params }) => {
   const id = params?.id;
@@ -39,6 +41,10 @@ const BlogDetail = async ({ params }) => {
         >
           Update Blog
         </Link>
+      </div>
+
+      <div>
+        <CommentAddForm blogId={id} />
       </div>
     </div>
   );

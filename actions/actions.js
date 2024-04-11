@@ -90,3 +90,15 @@ export const addCommentToBlog = async (blogId, formData) => {
   revalidatePath(`/blogs/${blogId}`);
   redirect(`/blogs/${blogId}`);
 };
+
+// fetch all comments
+
+export const fetchComments = async blogId => {
+  const comments = await prisma.comment.findMany({
+    where: {
+      blogId: blogId,
+    },
+  });
+
+  return comments;
+};

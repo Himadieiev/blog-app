@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { fetchSingleBlog } from '../../../actions/actions';
 import CommentAddForm from '@/app/components/forms/CommentAddForm';
+import CommentList from '@/app/components/CommentList';
 
 const BlogDetail = async ({ params }) => {
   const id = params?.id;
@@ -45,6 +46,10 @@ const BlogDetail = async ({ params }) => {
 
       <div>
         <CommentAddForm blogId={id} />
+      </div>
+
+      <div>
+        <CommentList blogId={id} />
       </div>
     </div>
   );
